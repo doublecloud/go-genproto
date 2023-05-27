@@ -20,13 +20,16 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	TransferService_Create_FullMethodName     = "/doublecloud.transfer.v1.TransferService/Create"
-	TransferService_Update_FullMethodName     = "/doublecloud.transfer.v1.TransferService/Update"
-	TransferService_Delete_FullMethodName     = "/doublecloud.transfer.v1.TransferService/Delete"
-	TransferService_List_FullMethodName       = "/doublecloud.transfer.v1.TransferService/List"
-	TransferService_Get_FullMethodName        = "/doublecloud.transfer.v1.TransferService/Get"
-	TransferService_Deactivate_FullMethodName = "/doublecloud.transfer.v1.TransferService/Deactivate"
-	TransferService_Activate_FullMethodName   = "/doublecloud.transfer.v1.TransferService/Activate"
+	TransferService_Create_FullMethodName                             = "/doublecloud.transfer.v1.TransferService/Create"
+	TransferService_Update_FullMethodName                             = "/doublecloud.transfer.v1.TransferService/Update"
+	TransferService_Delete_FullMethodName                             = "/doublecloud.transfer.v1.TransferService/Delete"
+	TransferService_List_FullMethodName                               = "/doublecloud.transfer.v1.TransferService/List"
+	TransferService_Get_FullMethodName                                = "/doublecloud.transfer.v1.TransferService/Get"
+	TransferService_Deactivate_FullMethodName                         = "/doublecloud.transfer.v1.TransferService/Deactivate"
+	TransferService_Activate_FullMethodName                           = "/doublecloud.transfer.v1.TransferService/Activate"
+	TransferService_GetMetrics_FullMethodName                         = "/doublecloud.transfer.v1.TransferService/GetMetrics"
+	TransferService_GetMetricExporterConnectionInfo_FullMethodName    = "/doublecloud.transfer.v1.TransferService/GetMetricExporterConnectionInfo"
+	TransferService_DeleteMetricExporterConnectionInfo_FullMethodName = "/doublecloud.transfer.v1.TransferService/DeleteMetricExporterConnectionInfo"
 )
 
 // TransferServiceClient is the client API for TransferService service.
@@ -40,6 +43,10 @@ type TransferServiceClient interface {
 	Get(ctx context.Context, in *GetTransferRequest, opts ...grpc.CallOption) (*Transfer, error)
 	Deactivate(ctx context.Context, in *DeactivateTransferRequest, opts ...grpc.CallOption) (*v1.Operation, error)
 	Activate(ctx context.Context, in *ActivateTransferRequest, opts ...grpc.CallOption) (*v1.Operation, error)
+	// Allows scraping of metrics by a prometheus scraper
+	GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*TransferMetrics, error)
+	GetMetricExporterConnectionInfo(ctx context.Context, in *MetricExporterConnectionInfoRequest, opts ...grpc.CallOption) (*MetricExporterConnectionInfoMetadata, error)
+	DeleteMetricExporterConnectionInfo(ctx context.Context, in *DeleteExporterConnectionInfoRequest, opts ...grpc.CallOption) (*v1.Operation, error)
 }
 
 type transferServiceClient struct {
@@ -113,6 +120,33 @@ func (c *transferServiceClient) Activate(ctx context.Context, in *ActivateTransf
 	return out, nil
 }
 
+func (c *transferServiceClient) GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*TransferMetrics, error) {
+	out := new(TransferMetrics)
+	err := c.cc.Invoke(ctx, TransferService_GetMetrics_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *transferServiceClient) GetMetricExporterConnectionInfo(ctx context.Context, in *MetricExporterConnectionInfoRequest, opts ...grpc.CallOption) (*MetricExporterConnectionInfoMetadata, error) {
+	out := new(MetricExporterConnectionInfoMetadata)
+	err := c.cc.Invoke(ctx, TransferService_GetMetricExporterConnectionInfo_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *transferServiceClient) DeleteMetricExporterConnectionInfo(ctx context.Context, in *DeleteExporterConnectionInfoRequest, opts ...grpc.CallOption) (*v1.Operation, error) {
+	out := new(v1.Operation)
+	err := c.cc.Invoke(ctx, TransferService_DeleteMetricExporterConnectionInfo_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TransferServiceServer is the server API for TransferService service.
 // All implementations must embed UnimplementedTransferServiceServer
 // for forward compatibility
@@ -124,6 +158,10 @@ type TransferServiceServer interface {
 	Get(context.Context, *GetTransferRequest) (*Transfer, error)
 	Deactivate(context.Context, *DeactivateTransferRequest) (*v1.Operation, error)
 	Activate(context.Context, *ActivateTransferRequest) (*v1.Operation, error)
+	// Allows scraping of metrics by a prometheus scraper
+	GetMetrics(context.Context, *GetMetricsRequest) (*TransferMetrics, error)
+	GetMetricExporterConnectionInfo(context.Context, *MetricExporterConnectionInfoRequest) (*MetricExporterConnectionInfoMetadata, error)
+	DeleteMetricExporterConnectionInfo(context.Context, *DeleteExporterConnectionInfoRequest) (*v1.Operation, error)
 	mustEmbedUnimplementedTransferServiceServer()
 }
 
@@ -151,6 +189,15 @@ func (UnimplementedTransferServiceServer) Deactivate(context.Context, *Deactivat
 }
 func (UnimplementedTransferServiceServer) Activate(context.Context, *ActivateTransferRequest) (*v1.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Activate not implemented")
+}
+func (UnimplementedTransferServiceServer) GetMetrics(context.Context, *GetMetricsRequest) (*TransferMetrics, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMetrics not implemented")
+}
+func (UnimplementedTransferServiceServer) GetMetricExporterConnectionInfo(context.Context, *MetricExporterConnectionInfoRequest) (*MetricExporterConnectionInfoMetadata, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMetricExporterConnectionInfo not implemented")
+}
+func (UnimplementedTransferServiceServer) DeleteMetricExporterConnectionInfo(context.Context, *DeleteExporterConnectionInfoRequest) (*v1.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteMetricExporterConnectionInfo not implemented")
 }
 func (UnimplementedTransferServiceServer) mustEmbedUnimplementedTransferServiceServer() {}
 
@@ -291,6 +338,60 @@ func _TransferService_Activate_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TransferService_GetMetrics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMetricsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TransferServiceServer).GetMetrics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TransferService_GetMetrics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TransferServiceServer).GetMetrics(ctx, req.(*GetMetricsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TransferService_GetMetricExporterConnectionInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MetricExporterConnectionInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TransferServiceServer).GetMetricExporterConnectionInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TransferService_GetMetricExporterConnectionInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TransferServiceServer).GetMetricExporterConnectionInfo(ctx, req.(*MetricExporterConnectionInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TransferService_DeleteMetricExporterConnectionInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteExporterConnectionInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TransferServiceServer).DeleteMetricExporterConnectionInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TransferService_DeleteMetricExporterConnectionInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TransferServiceServer).DeleteMetricExporterConnectionInfo(ctx, req.(*DeleteExporterConnectionInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TransferService_ServiceDesc is the grpc.ServiceDesc for TransferService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -325,6 +426,18 @@ var TransferService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Activate",
 			Handler:    _TransferService_Activate_Handler,
+		},
+		{
+			MethodName: "GetMetrics",
+			Handler:    _TransferService_GetMetrics_Handler,
+		},
+		{
+			MethodName: "GetMetricExporterConnectionInfo",
+			Handler:    _TransferService_GetMetricExporterConnectionInfo_Handler,
+		},
+		{
+			MethodName: "DeleteMetricExporterConnectionInfo",
+			Handler:    _TransferService_DeleteMetricExporterConnectionInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
