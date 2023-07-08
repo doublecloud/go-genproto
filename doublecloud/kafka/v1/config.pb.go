@@ -129,6 +129,55 @@ func (x *SchemaRegistryConfig) GetEnabled() bool {
 	return false
 }
 
+// Configuration for REST API.
+type RestAPIConfig struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Is REST API enabled for this cluster.
+	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+}
+
+func (x *RestAPIConfig) Reset() {
+	*x = RestAPIConfig{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_doublecloud_kafka_v1_config_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RestAPIConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RestAPIConfig) ProtoMessage() {}
+
+func (x *RestAPIConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_doublecloud_kafka_v1_config_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RestAPIConfig.ProtoReflect.Descriptor instead.
+func (*RestAPIConfig) Descriptor() ([]byte, []int) {
+	return file_doublecloud_kafka_v1_config_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *RestAPIConfig) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
 var File_doublecloud_kafka_v1_config_proto protoreflect.FileDescriptor
 
 var file_doublecloud_kafka_v1_config_proto_rawDesc = []byte{
@@ -151,12 +200,14 @@ var file_doublecloud_kafka_v1_config_proto_rawDesc = []byte{
 	0x78, 0x42, 0x79, 0x74, 0x65, 0x73, 0x22, 0x30, 0x0a, 0x14, 0x53, 0x63, 0x68, 0x65, 0x6d, 0x61,
 	0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x18,
 	0x0a, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52,
-	0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x42, 0x3f, 0x5a, 0x3d, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x64, 0x6f, 0x75, 0x62, 0x6c, 0x65, 0x63, 0x6c, 0x6f,
-	0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x64,
-	0x6f, 0x75, 0x62, 0x6c, 0x65, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x6b, 0x61, 0x66, 0x6b, 0x61,
-	0x2f, 0x76, 0x31, 0x3b, 0x6b, 0x61, 0x66, 0x6b, 0x61, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x22, 0x29, 0x0a, 0x0d, 0x52, 0x65, 0x73, 0x74,
+	0x41, 0x50, 0x49, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x6e, 0x61,
+	0x62, 0x6c, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x65, 0x6e, 0x61, 0x62,
+	0x6c, 0x65, 0x64, 0x42, 0x3f, 0x5a, 0x3d, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
+	0x6d, 0x2f, 0x64, 0x6f, 0x75, 0x62, 0x6c, 0x65, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f,
+	0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x64, 0x6f, 0x75, 0x62, 0x6c, 0x65,
+	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x6b, 0x61, 0x66, 0x6b, 0x61, 0x2f, 0x76, 0x31, 0x3b, 0x6b,
+	0x61, 0x66, 0x6b, 0x61, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -171,15 +222,16 @@ func file_doublecloud_kafka_v1_config_proto_rawDescGZIP() []byte {
 	return file_doublecloud_kafka_v1_config_proto_rawDescData
 }
 
-var file_doublecloud_kafka_v1_config_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_doublecloud_kafka_v1_config_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_doublecloud_kafka_v1_config_proto_goTypes = []interface{}{
 	(*KafkaConfig)(nil),           // 0: doublecloud.kafka.v1.KafkaConfig
 	(*SchemaRegistryConfig)(nil),  // 1: doublecloud.kafka.v1.SchemaRegistryConfig
-	(*wrapperspb.Int64Value)(nil), // 2: google.protobuf.Int64Value
+	(*RestAPIConfig)(nil),         // 2: doublecloud.kafka.v1.RestAPIConfig
+	(*wrapperspb.Int64Value)(nil), // 3: google.protobuf.Int64Value
 }
 var file_doublecloud_kafka_v1_config_proto_depIdxs = []int32{
-	2, // 0: doublecloud.kafka.v1.KafkaConfig.message_max_bytes:type_name -> google.protobuf.Int64Value
-	2, // 1: doublecloud.kafka.v1.KafkaConfig.replica_fetch_max_bytes:type_name -> google.protobuf.Int64Value
+	3, // 0: doublecloud.kafka.v1.KafkaConfig.message_max_bytes:type_name -> google.protobuf.Int64Value
+	3, // 1: doublecloud.kafka.v1.KafkaConfig.replica_fetch_max_bytes:type_name -> google.protobuf.Int64Value
 	2, // [2:2] is the sub-list for method output_type
 	2, // [2:2] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
@@ -217,6 +269,18 @@ func file_doublecloud_kafka_v1_config_proto_init() {
 				return nil
 			}
 		}
+		file_doublecloud_kafka_v1_config_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RestAPIConfig); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -224,7 +288,7 @@ func file_doublecloud_kafka_v1_config_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_doublecloud_kafka_v1_config_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
