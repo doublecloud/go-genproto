@@ -29,6 +29,7 @@ const (
 	WorkbookService_UpdateConnection_FullMethodName    = "/doublecloud.visualization.v1.WorkbookService/UpdateConnection"
 	WorkbookService_DeleteConnection_FullMethodName    = "/doublecloud.visualization.v1.WorkbookService/DeleteConnection"
 	WorkbookService_AdviseDatasetFields_FullMethodName = "/doublecloud.visualization.v1.WorkbookService/AdviseDatasetFields"
+	WorkbookService_ListWorkbooks_FullMethodName       = "/doublecloud.visualization.v1.WorkbookService/ListWorkbooks"
 )
 
 // WorkbookServiceClient is the client API for WorkbookService service.
@@ -47,6 +48,8 @@ type WorkbookServiceClient interface {
 	DeleteConnection(ctx context.Context, in *DeleteWorkbookConnectionRequest, opts ...grpc.CallOption) (*v1.Operation, error)
 	// List all direct fields of dataset with configured data source
 	AdviseDatasetFields(ctx context.Context, in *AdviseDatasetFieldsRequest, opts ...grpc.CallOption) (*AdviseDatasetFieldsResponse, error)
+	// List all workbooks for given project_id
+	ListWorkbooks(ctx context.Context, in *ListWorkbooksRequest, opts ...grpc.CallOption) (*ListWorkbooksResponse, error)
 }
 
 type workbookServiceClient struct {
@@ -138,6 +141,15 @@ func (c *workbookServiceClient) AdviseDatasetFields(ctx context.Context, in *Adv
 	return out, nil
 }
 
+func (c *workbookServiceClient) ListWorkbooks(ctx context.Context, in *ListWorkbooksRequest, opts ...grpc.CallOption) (*ListWorkbooksResponse, error) {
+	out := new(ListWorkbooksResponse)
+	err := c.cc.Invoke(ctx, WorkbookService_ListWorkbooks_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WorkbookServiceServer is the server API for WorkbookService service.
 // All implementations must embed UnimplementedWorkbookServiceServer
 // for forward compatibility
@@ -154,6 +166,8 @@ type WorkbookServiceServer interface {
 	DeleteConnection(context.Context, *DeleteWorkbookConnectionRequest) (*v1.Operation, error)
 	// List all direct fields of dataset with configured data source
 	AdviseDatasetFields(context.Context, *AdviseDatasetFieldsRequest) (*AdviseDatasetFieldsResponse, error)
+	// List all workbooks for given project_id
+	ListWorkbooks(context.Context, *ListWorkbooksRequest) (*ListWorkbooksResponse, error)
 	mustEmbedUnimplementedWorkbookServiceServer()
 }
 
@@ -187,6 +201,9 @@ func (UnimplementedWorkbookServiceServer) DeleteConnection(context.Context, *Del
 }
 func (UnimplementedWorkbookServiceServer) AdviseDatasetFields(context.Context, *AdviseDatasetFieldsRequest) (*AdviseDatasetFieldsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AdviseDatasetFields not implemented")
+}
+func (UnimplementedWorkbookServiceServer) ListWorkbooks(context.Context, *ListWorkbooksRequest) (*ListWorkbooksResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListWorkbooks not implemented")
 }
 func (UnimplementedWorkbookServiceServer) mustEmbedUnimplementedWorkbookServiceServer() {}
 
@@ -363,6 +380,24 @@ func _WorkbookService_AdviseDatasetFields_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WorkbookService_ListWorkbooks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListWorkbooksRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkbookServiceServer).ListWorkbooks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkbookService_ListWorkbooks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkbookServiceServer).ListWorkbooks(ctx, req.(*ListWorkbooksRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WorkbookService_ServiceDesc is the grpc.ServiceDesc for WorkbookService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -405,6 +440,10 @@ var WorkbookService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AdviseDatasetFields",
 			Handler:    _WorkbookService_AdviseDatasetFields_Handler,
+		},
+		{
+			MethodName: "ListWorkbooks",
+			Handler:    _WorkbookService_ListWorkbooks_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

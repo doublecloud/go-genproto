@@ -719,6 +719,100 @@ func (x *AdviseDatasetFieldsResponse) GetDataset() *Dataset {
 	return nil
 }
 
+type ListWorkbooksRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ProjectId string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+}
+
+func (x *ListWorkbooksRequest) Reset() {
+	*x = ListWorkbooksRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_doublecloud_visualization_v1_workbook_service_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListWorkbooksRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListWorkbooksRequest) ProtoMessage() {}
+
+func (x *ListWorkbooksRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_doublecloud_visualization_v1_workbook_service_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListWorkbooksRequest.ProtoReflect.Descriptor instead.
+func (*ListWorkbooksRequest) Descriptor() ([]byte, []int) {
+	return file_doublecloud_visualization_v1_workbook_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ListWorkbooksRequest) GetProjectId() string {
+	if x != nil {
+		return x.ProjectId
+	}
+	return ""
+}
+
+type ListWorkbooksResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Workbooks []*WorkbooksIndexItem `protobuf:"bytes,1,rep,name=workbooks,proto3" json:"workbooks,omitempty"`
+}
+
+func (x *ListWorkbooksResponse) Reset() {
+	*x = ListWorkbooksResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_doublecloud_visualization_v1_workbook_service_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListWorkbooksResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListWorkbooksResponse) ProtoMessage() {}
+
+func (x *ListWorkbooksResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_doublecloud_visualization_v1_workbook_service_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListWorkbooksResponse.ProtoReflect.Descriptor instead.
+func (*ListWorkbooksResponse) Descriptor() ([]byte, []int) {
+	return file_doublecloud_visualization_v1_workbook_service_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ListWorkbooksResponse) GetWorkbooks() []*WorkbooksIndexItem {
+	if x != nil {
+		return x.Workbooks
+	}
+	return nil
+}
+
 var File_doublecloud_visualization_v1_workbook_service_proto protoreflect.FileDescriptor
 
 var file_doublecloud_visualization_v1_workbook_service_proto_rawDesc = []byte{
@@ -837,7 +931,17 @@ var file_doublecloud_visualization_v1_workbook_service_proto_rawDesc = []byte{
 	0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x25, 0x2e, 0x64, 0x6f, 0x75, 0x62, 0x6c,
 	0x65, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x76, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x69, 0x7a, 0x61,
 	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x52,
-	0x07, 0x64, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x32, 0xed, 0x07, 0x0a, 0x0f, 0x57, 0x6f, 0x72,
+	0x07, 0x64, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x22, 0x35, 0x0a, 0x14, 0x4c, 0x69, 0x73, 0x74,
+	0x57, 0x6f, 0x72, 0x6b, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x22,
+	0x67, 0x0a, 0x15, 0x4c, 0x69, 0x73, 0x74, 0x57, 0x6f, 0x72, 0x6b, 0x62, 0x6f, 0x6f, 0x6b, 0x73,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4e, 0x0a, 0x09, 0x77, 0x6f, 0x72, 0x6b,
+	0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x30, 0x2e, 0x64, 0x6f,
+	0x75, 0x62, 0x6c, 0x65, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x76, 0x69, 0x73, 0x75, 0x61, 0x6c,
+	0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x57, 0x6f, 0x72, 0x6b, 0x62,
+	0x6f, 0x6f, 0x6b, 0x73, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x09, 0x77,
+	0x6f, 0x72, 0x6b, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x32, 0xe7, 0x08, 0x0a, 0x0f, 0x57, 0x6f, 0x72,
 	0x6b, 0x62, 0x6f, 0x6f, 0x6b, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x6a, 0x0a, 0x03,
 	0x47, 0x65, 0x74, 0x12, 0x30, 0x2e, 0x64, 0x6f, 0x75, 0x62, 0x6c, 0x65, 0x63, 0x6c, 0x6f, 0x75,
 	0x64, 0x2e, 0x76, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e,
@@ -900,13 +1004,20 @@ var file_doublecloud_visualization_v1_workbook_service_proto_rawDesc = []byte{
 	0x64, 0x6f, 0x75, 0x62, 0x6c, 0x65, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x76, 0x69, 0x73, 0x75,
 	0x61, 0x6c, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x64, 0x76,
 	0x69, 0x73, 0x65, 0x44, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x73,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x4f, 0x5a, 0x4d, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x64, 0x6f, 0x75, 0x62, 0x6c, 0x65, 0x63, 0x6c, 0x6f,
-	0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x64,
-	0x6f, 0x75, 0x62, 0x6c, 0x65, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x76, 0x69, 0x73, 0x75, 0x61,
-	0x6c, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2f, 0x76, 0x31, 0x3b, 0x76, 0x69, 0x73, 0x75,
-	0x61, 0x6c, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x78, 0x0a, 0x0d, 0x4c, 0x69, 0x73, 0x74,
+	0x57, 0x6f, 0x72, 0x6b, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x12, 0x32, 0x2e, 0x64, 0x6f, 0x75, 0x62,
+	0x6c, 0x65, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x76, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x69, 0x7a,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x57, 0x6f, 0x72,
+	0x6b, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x33, 0x2e,
+	0x64, 0x6f, 0x75, 0x62, 0x6c, 0x65, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x76, 0x69, 0x73, 0x75,
+	0x61, 0x6c, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73,
+	0x74, 0x57, 0x6f, 0x72, 0x6b, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x42, 0x4f, 0x5a, 0x4d, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x2f, 0x64, 0x6f, 0x75, 0x62, 0x6c, 0x65, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d,
+	0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x64, 0x6f, 0x75, 0x62, 0x6c, 0x65, 0x63,
+	0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x76, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x69, 0x7a, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x2f, 0x76, 0x31, 0x3b, 0x76, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x69, 0x7a, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -921,7 +1032,7 @@ func file_doublecloud_visualization_v1_workbook_service_proto_rawDescGZIP() []by
 	return file_doublecloud_visualization_v1_workbook_service_proto_rawDescData
 }
 
-var file_doublecloud_visualization_v1_workbook_service_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_doublecloud_visualization_v1_workbook_service_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_doublecloud_visualization_v1_workbook_service_proto_goTypes = []interface{}{
 	(*GetWorkbookRequest)(nil),              // 0: doublecloud.visualization.v1.GetWorkbookRequest
 	(*GetWorkbookResponse)(nil),             // 1: doublecloud.visualization.v1.GetWorkbookResponse
@@ -935,47 +1046,53 @@ var file_doublecloud_visualization_v1_workbook_service_proto_goTypes = []interfa
 	(*DeleteWorkbookConnectionRequest)(nil), // 9: doublecloud.visualization.v1.DeleteWorkbookConnectionRequest
 	(*AdviseDatasetFieldsRequest)(nil),      // 10: doublecloud.visualization.v1.AdviseDatasetFieldsRequest
 	(*AdviseDatasetFieldsResponse)(nil),     // 11: doublecloud.visualization.v1.AdviseDatasetFieldsResponse
-	(*Workbook)(nil),                        // 12: doublecloud.visualization.v1.Workbook
-	(*wrapperspb.BoolValue)(nil),            // 13: google.protobuf.BoolValue
-	(*Connection)(nil),                      // 14: doublecloud.visualization.v1.Connection
-	(*Secret)(nil),                          // 15: doublecloud.visualization.v1.Secret
-	(*Dataset)(nil),                         // 16: doublecloud.visualization.v1.Dataset
-	(*v1.Operation)(nil),                    // 17: doublecloud.v1.Operation
+	(*ListWorkbooksRequest)(nil),            // 12: doublecloud.visualization.v1.ListWorkbooksRequest
+	(*ListWorkbooksResponse)(nil),           // 13: doublecloud.visualization.v1.ListWorkbooksResponse
+	(*Workbook)(nil),                        // 14: doublecloud.visualization.v1.Workbook
+	(*wrapperspb.BoolValue)(nil),            // 15: google.protobuf.BoolValue
+	(*Connection)(nil),                      // 16: doublecloud.visualization.v1.Connection
+	(*Secret)(nil),                          // 17: doublecloud.visualization.v1.Secret
+	(*Dataset)(nil),                         // 18: doublecloud.visualization.v1.Dataset
+	(*WorkbooksIndexItem)(nil),              // 19: doublecloud.visualization.v1.WorkbooksIndexItem
+	(*v1.Operation)(nil),                    // 20: doublecloud.v1.Operation
 }
 var file_doublecloud_visualization_v1_workbook_service_proto_depIdxs = []int32{
-	12, // 0: doublecloud.visualization.v1.GetWorkbookResponse.workbook:type_name -> doublecloud.visualization.v1.Workbook
-	12, // 1: doublecloud.visualization.v1.UpdateWorkbookRequest.workbook:type_name -> doublecloud.visualization.v1.Workbook
-	13, // 2: doublecloud.visualization.v1.UpdateWorkbookRequest.force_rewrite:type_name -> google.protobuf.BoolValue
-	14, // 3: doublecloud.visualization.v1.GetWorkbookConnectionResponse.connection:type_name -> doublecloud.visualization.v1.Connection
-	14, // 4: doublecloud.visualization.v1.CreateWorkbookConnectionRequest.connection:type_name -> doublecloud.visualization.v1.Connection
-	15, // 5: doublecloud.visualization.v1.CreateWorkbookConnectionRequest.secret:type_name -> doublecloud.visualization.v1.Secret
-	14, // 6: doublecloud.visualization.v1.UpdateWorkbookConnectionRequest.connection:type_name -> doublecloud.visualization.v1.Connection
-	15, // 7: doublecloud.visualization.v1.UpdateWorkbookConnectionRequest.secret:type_name -> doublecloud.visualization.v1.Secret
-	16, // 8: doublecloud.visualization.v1.AdviseDatasetFieldsRequest.partial_dataset:type_name -> doublecloud.visualization.v1.Dataset
-	16, // 9: doublecloud.visualization.v1.AdviseDatasetFieldsResponse.dataset:type_name -> doublecloud.visualization.v1.Dataset
-	0,  // 10: doublecloud.visualization.v1.WorkbookService.Get:input_type -> doublecloud.visualization.v1.GetWorkbookRequest
-	2,  // 11: doublecloud.visualization.v1.WorkbookService.Create:input_type -> doublecloud.visualization.v1.CreateWorkbookRequest
-	3,  // 12: doublecloud.visualization.v1.WorkbookService.Update:input_type -> doublecloud.visualization.v1.UpdateWorkbookRequest
-	4,  // 13: doublecloud.visualization.v1.WorkbookService.Delete:input_type -> doublecloud.visualization.v1.DeleteWorkbookRequest
-	5,  // 14: doublecloud.visualization.v1.WorkbookService.GetConnection:input_type -> doublecloud.visualization.v1.GetWorkbookConnectionRequest
-	7,  // 15: doublecloud.visualization.v1.WorkbookService.CreateConnection:input_type -> doublecloud.visualization.v1.CreateWorkbookConnectionRequest
-	8,  // 16: doublecloud.visualization.v1.WorkbookService.UpdateConnection:input_type -> doublecloud.visualization.v1.UpdateWorkbookConnectionRequest
-	9,  // 17: doublecloud.visualization.v1.WorkbookService.DeleteConnection:input_type -> doublecloud.visualization.v1.DeleteWorkbookConnectionRequest
-	10, // 18: doublecloud.visualization.v1.WorkbookService.AdviseDatasetFields:input_type -> doublecloud.visualization.v1.AdviseDatasetFieldsRequest
-	1,  // 19: doublecloud.visualization.v1.WorkbookService.Get:output_type -> doublecloud.visualization.v1.GetWorkbookResponse
-	17, // 20: doublecloud.visualization.v1.WorkbookService.Create:output_type -> doublecloud.v1.Operation
-	17, // 21: doublecloud.visualization.v1.WorkbookService.Update:output_type -> doublecloud.v1.Operation
-	17, // 22: doublecloud.visualization.v1.WorkbookService.Delete:output_type -> doublecloud.v1.Operation
-	6,  // 23: doublecloud.visualization.v1.WorkbookService.GetConnection:output_type -> doublecloud.visualization.v1.GetWorkbookConnectionResponse
-	17, // 24: doublecloud.visualization.v1.WorkbookService.CreateConnection:output_type -> doublecloud.v1.Operation
-	17, // 25: doublecloud.visualization.v1.WorkbookService.UpdateConnection:output_type -> doublecloud.v1.Operation
-	17, // 26: doublecloud.visualization.v1.WorkbookService.DeleteConnection:output_type -> doublecloud.v1.Operation
-	11, // 27: doublecloud.visualization.v1.WorkbookService.AdviseDatasetFields:output_type -> doublecloud.visualization.v1.AdviseDatasetFieldsResponse
-	19, // [19:28] is the sub-list for method output_type
-	10, // [10:19] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	14, // 0: doublecloud.visualization.v1.GetWorkbookResponse.workbook:type_name -> doublecloud.visualization.v1.Workbook
+	14, // 1: doublecloud.visualization.v1.UpdateWorkbookRequest.workbook:type_name -> doublecloud.visualization.v1.Workbook
+	15, // 2: doublecloud.visualization.v1.UpdateWorkbookRequest.force_rewrite:type_name -> google.protobuf.BoolValue
+	16, // 3: doublecloud.visualization.v1.GetWorkbookConnectionResponse.connection:type_name -> doublecloud.visualization.v1.Connection
+	16, // 4: doublecloud.visualization.v1.CreateWorkbookConnectionRequest.connection:type_name -> doublecloud.visualization.v1.Connection
+	17, // 5: doublecloud.visualization.v1.CreateWorkbookConnectionRequest.secret:type_name -> doublecloud.visualization.v1.Secret
+	16, // 6: doublecloud.visualization.v1.UpdateWorkbookConnectionRequest.connection:type_name -> doublecloud.visualization.v1.Connection
+	17, // 7: doublecloud.visualization.v1.UpdateWorkbookConnectionRequest.secret:type_name -> doublecloud.visualization.v1.Secret
+	18, // 8: doublecloud.visualization.v1.AdviseDatasetFieldsRequest.partial_dataset:type_name -> doublecloud.visualization.v1.Dataset
+	18, // 9: doublecloud.visualization.v1.AdviseDatasetFieldsResponse.dataset:type_name -> doublecloud.visualization.v1.Dataset
+	19, // 10: doublecloud.visualization.v1.ListWorkbooksResponse.workbooks:type_name -> doublecloud.visualization.v1.WorkbooksIndexItem
+	0,  // 11: doublecloud.visualization.v1.WorkbookService.Get:input_type -> doublecloud.visualization.v1.GetWorkbookRequest
+	2,  // 12: doublecloud.visualization.v1.WorkbookService.Create:input_type -> doublecloud.visualization.v1.CreateWorkbookRequest
+	3,  // 13: doublecloud.visualization.v1.WorkbookService.Update:input_type -> doublecloud.visualization.v1.UpdateWorkbookRequest
+	4,  // 14: doublecloud.visualization.v1.WorkbookService.Delete:input_type -> doublecloud.visualization.v1.DeleteWorkbookRequest
+	5,  // 15: doublecloud.visualization.v1.WorkbookService.GetConnection:input_type -> doublecloud.visualization.v1.GetWorkbookConnectionRequest
+	7,  // 16: doublecloud.visualization.v1.WorkbookService.CreateConnection:input_type -> doublecloud.visualization.v1.CreateWorkbookConnectionRequest
+	8,  // 17: doublecloud.visualization.v1.WorkbookService.UpdateConnection:input_type -> doublecloud.visualization.v1.UpdateWorkbookConnectionRequest
+	9,  // 18: doublecloud.visualization.v1.WorkbookService.DeleteConnection:input_type -> doublecloud.visualization.v1.DeleteWorkbookConnectionRequest
+	10, // 19: doublecloud.visualization.v1.WorkbookService.AdviseDatasetFields:input_type -> doublecloud.visualization.v1.AdviseDatasetFieldsRequest
+	12, // 20: doublecloud.visualization.v1.WorkbookService.ListWorkbooks:input_type -> doublecloud.visualization.v1.ListWorkbooksRequest
+	1,  // 21: doublecloud.visualization.v1.WorkbookService.Get:output_type -> doublecloud.visualization.v1.GetWorkbookResponse
+	20, // 22: doublecloud.visualization.v1.WorkbookService.Create:output_type -> doublecloud.v1.Operation
+	20, // 23: doublecloud.visualization.v1.WorkbookService.Update:output_type -> doublecloud.v1.Operation
+	20, // 24: doublecloud.visualization.v1.WorkbookService.Delete:output_type -> doublecloud.v1.Operation
+	6,  // 25: doublecloud.visualization.v1.WorkbookService.GetConnection:output_type -> doublecloud.visualization.v1.GetWorkbookConnectionResponse
+	20, // 26: doublecloud.visualization.v1.WorkbookService.CreateConnection:output_type -> doublecloud.v1.Operation
+	20, // 27: doublecloud.visualization.v1.WorkbookService.UpdateConnection:output_type -> doublecloud.v1.Operation
+	20, // 28: doublecloud.visualization.v1.WorkbookService.DeleteConnection:output_type -> doublecloud.v1.Operation
+	11, // 29: doublecloud.visualization.v1.WorkbookService.AdviseDatasetFields:output_type -> doublecloud.visualization.v1.AdviseDatasetFieldsResponse
+	13, // 30: doublecloud.visualization.v1.WorkbookService.ListWorkbooks:output_type -> doublecloud.visualization.v1.ListWorkbooksResponse
+	21, // [21:31] is the sub-list for method output_type
+	11, // [11:21] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_doublecloud_visualization_v1_workbook_service_proto_init() }
@@ -1129,6 +1246,30 @@ func file_doublecloud_visualization_v1_workbook_service_proto_init() {
 				return nil
 			}
 		}
+		file_doublecloud_visualization_v1_workbook_service_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListWorkbooksRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_doublecloud_visualization_v1_workbook_service_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListWorkbooksResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1136,7 +1277,7 @@ func file_doublecloud_visualization_v1_workbook_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_doublecloud_visualization_v1_workbook_service_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
