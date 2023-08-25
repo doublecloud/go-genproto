@@ -206,9 +206,6 @@ type isNetworkConnection_ConnectionInfo interface {
 }
 
 type NetworkConnection_Aws struct {
-	// DataCloud connection info.
-	// DataCloudNetworkConnectionInfo data_cloud = 3 [(dataplatform.options.field_info)
-	// = { api_scopes: {DoubleCloud: API_SCOPE_PUBLIC}}];
 	// AWS connection info.
 	Aws *AWSNetworkConnectionInfo `protobuf:"bytes,4,opt,name=aws,proto3,oneof"`
 }

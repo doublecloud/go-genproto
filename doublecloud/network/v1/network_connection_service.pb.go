@@ -273,12 +273,12 @@ type isCreateNetworkConnectionRequest_Params interface {
 }
 
 type CreateNetworkConnectionRequest_Aws struct {
-	// Connect DataCloud Network with AWS VPC.
+	// Connect DoubleCloud Network with AWS VPC.
 	Aws *CreateAWSNetworkConnectionRequest `protobuf:"bytes,3,opt,name=aws,proto3,oneof"`
 }
 
 type CreateNetworkConnectionRequest_Google struct {
-	// Connect DataCloud Network with Google Cloud VPC.
+	// Connect DoubleCloud Network with Google Cloud VPC.
 	Google *CreateGoogleNetworkConnectionRequest `protobuf:"bytes,4,opt,name=google,proto3,oneof"`
 }
 
