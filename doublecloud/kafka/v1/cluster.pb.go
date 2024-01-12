@@ -564,6 +564,7 @@ type ClusterResources_Kafka struct {
 
 	// ID of the preset for computational resources available to a host (CPU, memory
 	// etc.).
+	// Means the minimal resource preset for autoscaling.
 	ResourcePresetId string `protobuf:"bytes,1,opt,name=resource_preset_id,json=resourcePresetId,proto3" json:"resource_preset_id,omitempty"`
 	// Volume of the storage available to a host, in bytes.
 	DiskSize *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=disk_size,json=diskSize,proto3" json:"disk_size,omitempty"`
