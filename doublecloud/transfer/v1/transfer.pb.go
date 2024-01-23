@@ -1096,12 +1096,15 @@ func (x *ManualSettings) GetNetworkId() string {
 	return ""
 }
 
+// Filter tables using lists of included and excluded tables.
 type TablesFilter struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// List of tables that will be included to transfer
 	IncludeTables []string `protobuf:"bytes,1,rep,name=include_tables,json=includeTables,proto3" json:"include_tables,omitempty"`
+	// List of tables that will be excluded to transfer
 	ExcludeTables []string `protobuf:"bytes,2,rep,name=exclude_tables,json=excludeTables,proto3" json:"exclude_tables,omitempty"`
 }
 
@@ -1151,12 +1154,15 @@ func (x *TablesFilter) GetExcludeTables() []string {
 	return nil
 }
 
+// Filter columns using lists of included and excluded columns.
 type ColumnsFilter struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// List of columns that will be included to transfer
 	IncludeColumns []string `protobuf:"bytes,1,rep,name=include_columns,json=includeColumns,proto3" json:"include_columns,omitempty"`
+	// List of columns that will be excluded to transfer
 	ExcludeColumns []string `protobuf:"bytes,2,rep,name=exclude_columns,json=excludeColumns,proto3" json:"exclude_columns,omitempty"`
 }
 
@@ -1206,13 +1212,16 @@ func (x *ColumnsFilter) GetExcludeColumns() []string {
 	return nil
 }
 
+// Override primary keys
 type ReplacePrimaryKeyTransformer struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// List of included and excluded tables
 	Tables *TablesFilter `protobuf:"bytes,1,opt,name=tables,proto3" json:"tables,omitempty"`
-	Keys   []string      `protobuf:"bytes,2,rep,name=keys,proto3" json:"keys,omitempty"`
+	// List of columns to be used as primary keys
+	Keys []string `protobuf:"bytes,2,rep,name=keys,proto3" json:"keys,omitempty"`
 }
 
 func (x *ReplacePrimaryKeyTransformer) Reset() {
@@ -1261,12 +1270,18 @@ func (x *ReplacePrimaryKeyTransformer) GetKeys() []string {
 	return nil
 }
 
+// Convert column values to strings
+// The values will be converted depending on the source type
+// Conversion rules are described here:
+// https://cloud.yandex.com/en/docs/data-transfer/concepts/data-transformation#convert-to-string
 type ToStringTransformer struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Tables  *TablesFilter  `protobuf:"bytes,1,opt,name=tables,proto3" json:"tables,omitempty"`
+	// List of included and excluded tables
+	Tables *TablesFilter `protobuf:"bytes,1,opt,name=tables,proto3" json:"tables,omitempty"`
+	// List of included and excluded columns
 	Columns *ColumnsFilter `protobuf:"bytes,2,opt,name=columns,proto3" json:"columns,omitempty"`
 }
 
@@ -1387,14 +1402,28 @@ func (x *DBTTransformer) GetOperation() DBTTransformer_Operation {
 	return DBTTransformer_OPERATION_UNSPECIFIED
 }
 
+// A transfer splits the X table into multiple tables (X_1, X_2, ..., X_n) based on
+// data.
+// If a row was located in the X table before it was split, it is now in the X_i
+// table,
+// where i is determined by the column list and split string parameters.
+// Example:
+// If the column list has two columns, month of birth and gender, specified and the
+// split string states @,
+// information about an employee whose name is John and who was born on February
+// 11, 1984,
+// from the Employees table will get to a new table named Employees@February@male.
 type TableSplitterTransformer struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Tables   *TablesFilter `protobuf:"bytes,1,opt,name=tables,proto3" json:"tables,omitempty"`
-	Columns  []string      `protobuf:"bytes,2,rep,name=columns,proto3" json:"columns,omitempty"`
-	Splitter string        `protobuf:"bytes,3,opt,name=splitter,proto3" json:"splitter,omitempty"`
+	// List of included and excluded tables
+	Tables *TablesFilter `protobuf:"bytes,1,opt,name=tables,proto3" json:"tables,omitempty"`
+	// Specify the columns in the tables to be partitioned.
+	Columns []string `protobuf:"bytes,2,rep,name=columns,proto3" json:"columns,omitempty"`
+	// Specify the split string to be used for merging components in a new table name.
+	Splitter string `protobuf:"bytes,3,opt,name=splitter,proto3" json:"splitter,omitempty"`
 }
 
 func (x *TableSplitterTransformer) Reset() {
@@ -1450,6 +1479,8 @@ func (x *TableSplitterTransformer) GetSplitter() string {
 	return ""
 }
 
+// Some transformers may have limitations and only apply to some source-target
+// pairs.
 type Transformer struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1559,11 +1590,20 @@ func (*Transformer_Dbt) isTransformer_Transformer() {}
 
 func (*Transformer_TableSplitterTransformer) isTransformer_Transformer() {}
 
+// Transformation is converting data using special transformer functions.
+// These functions are executed on a data stream, applied to each data change item,
+// and transform them.
+// A transformer can be run at both the metadata and data levels.
+// Data can only be transformed if the source and target are of different types.
 type Transformation struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Transformers are set as a list.
+	// When activating a transfer, a transformation plan is made for the tables that
+	// match the specified criteria.
+	// Transformers are applied to the tables in the sequence specified in the list.
 	Transformers []*Transformer `protobuf:"bytes,1,rep,name=transformers,proto3" json:"transformers,omitempty"`
 }
 
