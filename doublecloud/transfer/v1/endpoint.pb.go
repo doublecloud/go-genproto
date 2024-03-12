@@ -143,7 +143,7 @@ type EndpointSettings struct {
 	//	*EndpointSettings_MongoTarget
 	//	*EndpointSettings_DatadogTarget
 	//	*EndpointSettings_CoralogixTarget
-	//	*EndpointSettings_BigqeuryTarget
+	//	*EndpointSettings_BigqueryTarget
 	Settings isEndpointSettings_Settings `protobuf_oneof:"settings"`
 }
 
@@ -375,9 +375,9 @@ func (x *EndpointSettings) GetCoralogixTarget() *endpoint.CoralogixTarget {
 	return nil
 }
 
-func (x *EndpointSettings) GetBigqeuryTarget() *endpoint.BigQueryTarget {
-	if x, ok := x.GetSettings().(*EndpointSettings_BigqeuryTarget); ok {
-		return x.BigqeuryTarget
+func (x *EndpointSettings) GetBigqueryTarget() *endpoint.BigQueryTarget {
+	if x, ok := x.GetSettings().(*EndpointSettings_BigqueryTarget); ok {
+		return x.BigqueryTarget
 	}
 	return nil
 }
@@ -494,8 +494,8 @@ type EndpointSettings_CoralogixTarget struct {
 	CoralogixTarget *endpoint.CoralogixTarget `protobuf:"bytes,157,opt,name=coralogix_target,json=coralogixTarget,proto3,oneof"`
 }
 
-type EndpointSettings_BigqeuryTarget struct {
-	BigqeuryTarget *endpoint.BigQueryTarget `protobuf:"bytes,158,opt,name=bigqeury_target,json=bigqeuryTarget,proto3,oneof"`
+type EndpointSettings_BigqueryTarget struct {
+	BigqueryTarget *endpoint.BigQueryTarget `protobuf:"bytes,158,opt,name=bigquery_target,json=bigqueryTarget,proto3,oneof"`
 }
 
 func (*EndpointSettings_MysqlSource) isEndpointSettings_Settings() {}
@@ -552,7 +552,7 @@ func (*EndpointSettings_DatadogTarget) isEndpointSettings_Settings() {}
 
 func (*EndpointSettings_CoralogixTarget) isEndpointSettings_Settings() {}
 
-func (*EndpointSettings_BigqeuryTarget) isEndpointSettings_Settings() {}
+func (*EndpointSettings_BigqueryTarget) isEndpointSettings_Settings() {}
 
 var File_doublecloud_transfer_v1_endpoint_proto protoreflect.FileDescriptor
 
@@ -832,11 +832,11 @@ var file_doublecloud_transfer_v1_endpoint_proto_rawDesc = []byte{
 	0x70, 0x6f, 0x69, 0x6e, 0x74, 0x2e, 0x43, 0x6f, 0x72, 0x61, 0x6c, 0x6f, 0x67, 0x69, 0x78, 0x54,
 	0x61, 0x72, 0x67, 0x65, 0x74, 0x48, 0x00, 0x52, 0x0f, 0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f, 0x67,
 	0x69, 0x78, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x12, 0x5c, 0x0a, 0x0f, 0x62, 0x69, 0x67, 0x71,
-	0x65, 0x75, 0x72, 0x79, 0x5f, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x18, 0x9e, 0x01, 0x20, 0x01,
+	0x75, 0x65, 0x72, 0x79, 0x5f, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x18, 0x9e, 0x01, 0x20, 0x01,
 	0x28, 0x0b, 0x32, 0x30, 0x2e, 0x64, 0x6f, 0x75, 0x62, 0x6c, 0x65, 0x63, 0x6c, 0x6f, 0x75, 0x64,
 	0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x65, 0x6e, 0x64,
 	0x70, 0x6f, 0x69, 0x6e, 0x74, 0x2e, 0x42, 0x69, 0x67, 0x51, 0x75, 0x65, 0x72, 0x79, 0x54, 0x61,
-	0x72, 0x67, 0x65, 0x74, 0x48, 0x00, 0x52, 0x0e, 0x62, 0x69, 0x67, 0x71, 0x65, 0x75, 0x72, 0x79,
+	0x72, 0x67, 0x65, 0x74, 0x48, 0x00, 0x52, 0x0e, 0x62, 0x69, 0x67, 0x71, 0x75, 0x65, 0x72, 0x79,
 	0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x42, 0x0a, 0x0a, 0x08, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e,
 	0x67, 0x73, 0x4a, 0x04, 0x08, 0x03, 0x10, 0x08, 0x4a, 0x04, 0x08, 0x0a, 0x10, 0x10, 0x4a, 0x04,
 	0x08, 0x11, 0x10, 0x65, 0x4a, 0x04, 0x08, 0x67, 0x10, 0x68, 0x4a, 0x04, 0x08, 0x69, 0x10, 0x6d,
@@ -927,7 +927,7 @@ var file_doublecloud_transfer_v1_endpoint_proto_depIdxs = []int32{
 	27, // 26: doublecloud.transfer.v1.EndpointSettings.mongo_target:type_name -> doublecloud.transfer.v1.endpoint.MongoTarget
 	28, // 27: doublecloud.transfer.v1.EndpointSettings.datadog_target:type_name -> doublecloud.transfer.v1.endpoint.DatadogTarget
 	29, // 28: doublecloud.transfer.v1.EndpointSettings.coralogix_target:type_name -> doublecloud.transfer.v1.endpoint.CoralogixTarget
-	30, // 29: doublecloud.transfer.v1.EndpointSettings.bigqeury_target:type_name -> doublecloud.transfer.v1.endpoint.BigQueryTarget
+	30, // 29: doublecloud.transfer.v1.EndpointSettings.bigquery_target:type_name -> doublecloud.transfer.v1.endpoint.BigQueryTarget
 	30, // [30:30] is the sub-list for method output_type
 	30, // [30:30] is the sub-list for method input_type
 	30, // [30:30] is the sub-list for extension type_name
@@ -994,7 +994,7 @@ func file_doublecloud_transfer_v1_endpoint_proto_init() {
 		(*EndpointSettings_MongoTarget)(nil),
 		(*EndpointSettings_DatadogTarget)(nil),
 		(*EndpointSettings_CoralogixTarget)(nil),
-		(*EndpointSettings_BigqeuryTarget)(nil),
+		(*EndpointSettings_BigqueryTarget)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
