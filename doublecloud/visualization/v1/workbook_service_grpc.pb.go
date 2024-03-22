@@ -30,6 +30,7 @@ const (
 	WorkbookService_DeleteConnection_FullMethodName    = "/doublecloud.visualization.v1.WorkbookService/DeleteConnection"
 	WorkbookService_AdviseDatasetFields_FullMethodName = "/doublecloud.visualization.v1.WorkbookService/AdviseDatasetFields"
 	WorkbookService_ListWorkbooks_FullMethodName       = "/doublecloud.visualization.v1.WorkbookService/ListWorkbooks"
+	WorkbookService_GetErrorDetails_FullMethodName     = "/doublecloud.visualization.v1.WorkbookService/GetErrorDetails"
 )
 
 // WorkbookServiceClient is the client API for WorkbookService service.
@@ -50,6 +51,8 @@ type WorkbookServiceClient interface {
 	AdviseDatasetFields(ctx context.Context, in *AdviseDatasetFieldsRequest, opts ...grpc.CallOption) (*AdviseDatasetFieldsResponse, error)
 	// List all workbooks for given project_id
 	ListWorkbooks(ctx context.Context, in *ListWorkbooksRequest, opts ...grpc.CallOption) (*ListWorkbooksResponse, error)
+	// Error details
+	GetErrorDetails(ctx context.Context, in *ErrorDetailsRequest, opts ...grpc.CallOption) (*ErrorDetailsResponse, error)
 }
 
 type workbookServiceClient struct {
@@ -150,6 +153,15 @@ func (c *workbookServiceClient) ListWorkbooks(ctx context.Context, in *ListWorkb
 	return out, nil
 }
 
+func (c *workbookServiceClient) GetErrorDetails(ctx context.Context, in *ErrorDetailsRequest, opts ...grpc.CallOption) (*ErrorDetailsResponse, error) {
+	out := new(ErrorDetailsResponse)
+	err := c.cc.Invoke(ctx, WorkbookService_GetErrorDetails_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WorkbookServiceServer is the server API for WorkbookService service.
 // All implementations must embed UnimplementedWorkbookServiceServer
 // for forward compatibility
@@ -168,6 +180,8 @@ type WorkbookServiceServer interface {
 	AdviseDatasetFields(context.Context, *AdviseDatasetFieldsRequest) (*AdviseDatasetFieldsResponse, error)
 	// List all workbooks for given project_id
 	ListWorkbooks(context.Context, *ListWorkbooksRequest) (*ListWorkbooksResponse, error)
+	// Error details
+	GetErrorDetails(context.Context, *ErrorDetailsRequest) (*ErrorDetailsResponse, error)
 	mustEmbedUnimplementedWorkbookServiceServer()
 }
 
@@ -204,6 +218,9 @@ func (UnimplementedWorkbookServiceServer) AdviseDatasetFields(context.Context, *
 }
 func (UnimplementedWorkbookServiceServer) ListWorkbooks(context.Context, *ListWorkbooksRequest) (*ListWorkbooksResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListWorkbooks not implemented")
+}
+func (UnimplementedWorkbookServiceServer) GetErrorDetails(context.Context, *ErrorDetailsRequest) (*ErrorDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetErrorDetails not implemented")
 }
 func (UnimplementedWorkbookServiceServer) mustEmbedUnimplementedWorkbookServiceServer() {}
 
@@ -398,6 +415,24 @@ func _WorkbookService_ListWorkbooks_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WorkbookService_GetErrorDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ErrorDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkbookServiceServer).GetErrorDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkbookService_GetErrorDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkbookServiceServer).GetErrorDetails(ctx, req.(*ErrorDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WorkbookService_ServiceDesc is the grpc.ServiceDesc for WorkbookService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -444,6 +479,10 @@ var WorkbookService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListWorkbooks",
 			Handler:    _WorkbookService_ListWorkbooks_Handler,
+		},
+		{
+			MethodName: "GetErrorDetails",
+			Handler:    _WorkbookService_GetErrorDetails_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
